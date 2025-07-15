@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import spockImg from "../assets/img/spock.png";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaUserEdit, FaTrashAlt } from "react-icons/fa";
 
@@ -10,7 +11,7 @@ export const ContactCard = ({ contact, onDelete }) => {
         <div className="card shadow">
             <div className="card-body d-flex">
                 <img
-                    src="../src/assets/img/spock.png"
+                    src={spockImg}
                     alt="Profile"
                     className="rounded-circle me-3"
                     style={{ width: "100px", height: "100px", objectFit: "cover" }}
