@@ -8,7 +8,7 @@ export const AddContact = () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        full_name: "",
+        name: "",
         email: "",
         phone: "",
         address: ""
@@ -25,10 +25,11 @@ export const AddContact = () => {
         e.preventDefault();
 
         try {
-            await createContact(formData); // send to API
-            const updatedContacts = await getContacts(); // refetch
-            dispatch({ type: "set_contacts", payload: updatedContacts }); // update store
-            navigate("/"); // go back to contact list
+            await createContact(formData);
+            const updatedContacts = await getContacts();
+            console.log("Fetched contacts:", updatedContacts);
+            dispatch({ type: "set_contacts", payload: updatedContacts });
+            navigate("/");
         } catch (error) {
             console.error("Failed to create contact:", error);
         }
@@ -43,8 +44,8 @@ export const AddContact = () => {
                     <input
                         type="text"
                         className="form-control"
-                        name="full_name"
-                        value={formData.full_name}
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                         required
                     />

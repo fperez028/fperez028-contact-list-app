@@ -13,6 +13,7 @@ export const Home = () => {
         const loadContacts = async () => {
             try {
                 const contacts = await getContacts();
+                console.log("Store contacts:", store.contacts);
                 dispatch({ type: "set_contacts", payload: contacts });
             } catch (error) {
                 console.error("Error fetching contacts:", error);

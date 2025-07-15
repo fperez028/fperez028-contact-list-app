@@ -1,15 +1,16 @@
-const API_BASE_URL = "https://playground.4geeks.com/apis/fake/contact";
+const API_BASE_URL = "https://playground.4geeks.com/contact/agendas";
 const AGENDA_SLUG = "fperez028";
 
 export async function getContacts() {
     try {
-        const response = await fetch(`${API_BASE_URL}/agenda/${AGENDA_SLUG}`);
+        const response = await fetch(`${API_BASE_URL}/${AGENDA_SLUG}/contacts`);
         if (!response.ok) {
             throw new Error(`Failed to fetch contacts: ${response.status}`);
         }
 
         const data = await response.json();
-        return data;
+        console.log("🔍 Raw contact API response:", data);
+        return data.contacts;
     } catch (error) {
         console.error("getContacts error:", error);
         throw error;
@@ -18,20 +19,17 @@ export async function getContacts() {
 
 export async function createContact(contactData) {
     try {
-        const response = await fetch(API_BASE_URL, {
+        const response = await fetch(`${API_BASE_URL}/${AGENDA_SLUG}/contacts`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                ...contactData,
-                agenda_slug: AGENDA_SLUG
-            })
+            body: JSON.stringify(contactData)
         });
 
         if (!response.ok) {
             throw new Error(`Failed to create contact: ${response.status}`);
         }
 
-        return await response.json(); // returns created contact
+        return await response.json();
     } catch (error) {
         console.error("createContact error:", error);
         throw error;

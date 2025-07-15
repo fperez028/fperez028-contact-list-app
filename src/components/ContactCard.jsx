@@ -9,15 +9,12 @@ const ContactCard = ({ contact, onDelete }) => {
     return (
         <div className="card shadow-sm">
             <div className="card-body d-flex">
-                {/* Placeholder image */}
                 <img
-                    src="https://via.placeholder.com/100"
+                    src="https://static.wikia.nocookie.net/stexpanded/images/2/27/Spock%2C_2267.jpg/revision/latest?cb=20100501033904"
                     alt="Profile"
                     className="rounded-circle me-3"
                     style={{ width: "100px", height: "100px", objectFit: "cover" }}
                 />
-
-                {/* Contact Details */}
                 <div className="flex-grow-1">
                     <h5 className="card-title">{contact.full_name}</h5>
                     <p className="mb-1 text-muted">
@@ -33,8 +30,6 @@ const ContactCard = ({ contact, onDelete }) => {
                         {contact.email}
                     </p>
                 </div>
-
-                {/* Edit & Delete Buttons */}
                 <div className="d-flex flex-column justify-content-around ms-3">
                     <button
                         className="btn btn-outline-primary btn-sm mb-2"
@@ -56,7 +51,7 @@ const ContactCard = ({ contact, onDelete }) => {
 
 ContactCard.propTypes = {
     contact: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         full_name: PropTypes.string,
         email: PropTypes.string,
         phone: PropTypes.string,
