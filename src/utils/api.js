@@ -35,3 +35,25 @@ export async function createContact(contactData) {
         throw error;
     }
 }
+
+export async function updateContact(contactId, updatedData) {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/${AGENDA_SLUG}/contacts/${contactId}`,
+            {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedData)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Failed to update contact: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("updateContact error:", error);
+        throw error;
+    }
+}

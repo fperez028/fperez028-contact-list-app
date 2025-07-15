@@ -16,7 +16,7 @@ const ContactCard = ({ contact, onDelete }) => {
                     style={{ width: "100px", height: "100px", objectFit: "cover" }}
                 />
                 <div className="flex-grow-1">
-                    <h5 className="card-title">{contact.full_name}</h5>
+                    <h5 className="card-title">{contact.name}</h5>
                     <p className="mb-1 text-muted">
                         <FaMapMarkerAlt className="me-2" />
                         {contact.address}
