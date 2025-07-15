@@ -57,3 +57,23 @@ export async function updateContact(contactId, updatedData) {
         throw error;
     }
 }
+
+export async function deleteContact(contactId) {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/${AGENDA_SLUG}/contacts/${contactId}`,
+      {
+        method: "DELETE"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete contact: ${response.status}`);
+    }
+
+    return true;
+  } catch (error) {
+    console.error("deleteContact error:", error);
+    throw error;
+  }
+}

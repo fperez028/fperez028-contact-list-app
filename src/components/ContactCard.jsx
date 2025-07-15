@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaUserEdit, FaTrashAlt } from "react-icons/fa";
 
-const ContactCard = ({ contact, onDelete }) => {
+export const ContactCard = ({ contact, onDelete }) => {
     const navigate = useNavigate();
 
     return (
@@ -57,7 +57,5 @@ ContactCard.propTypes = {
         phone: PropTypes.string,
         address: PropTypes.string
     }),
-    onDelete: PropTypes.func // Will be used later when we add the modal
+    onDelete: PropTypes.func
 };
-
-export default ContactCard;
