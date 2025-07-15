@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+  const navigate = useNavigate();
 
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+  return (
+    <nav className="navbar px-4">
+      <div className="container-fluid">
+        <h2 className="fw-bold">Contact List</h2>
+
+        <button className="btn btn-success" onClick={() => navigate("/add")}>
+			Add New Contact
+        </button>
+      </div>
+    </nav>
+  );
 };

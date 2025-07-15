@@ -50,33 +50,26 @@ export const Home = () => {
 
   return (
     <div className="container my-5">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold">Contact List</h2>
-        <button className="btn btn-success" onClick={() => navigate("/add")}>
-          Add New Contact
-        </button>
-      </div>
+        <div className="row">
+            {store.contacts?.length > 0 ? (
+              store.contacts.map((contact) => (
+                <div key={contact.id} className="col-md-6 mb-4">
+                  <ContactCard contact={contact} onDelete={handleDeleteClick} />
+                </div>
+              ))
+            ) : (
+              <p className="text-muted">No contacts found.</p>
+            )}
+        </div>
 
-      <div className="row">
-        {store.contacts?.length > 0 ? (
-          store.contacts.map((contact) => (
-            <div key={contact.id} className="col-md-6 mb-4">
-              <ContactCard contact={contact} onDelete={handleDeleteClick} />
-            </div>
-          ))
-        ) : (
-          <p className="text-muted">No contacts found.</p>
+        {selectedContact && (
+          <DeleteConfirmationModal
+            show={showModal}
+            onClose={handleCloseModal}
+            onConfirm={handleConfirmDelete}
+            contactName={selectedContact.name}
+          />
         )}
-      </div>
-
-      {selectedContact && (
-        <DeleteConfirmationModal
-          show={showModal}
-          onClose={handleCloseModal}
-          onConfirm={handleConfirmDelete}
-          contactName={selectedContact.name}
-        />
-      )}
     </div>
   );
 };
