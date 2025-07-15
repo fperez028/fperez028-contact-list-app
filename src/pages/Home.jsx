@@ -16,7 +16,6 @@ export const Home = () => {
         const loadContacts = async () => {
             try {
                 const contacts = await getContacts();
-                console.log("Store contacts:", store.contacts);
                 dispatch({ type: "set_contacts", payload: contacts });
             } catch (error) {
                 console.error("Error fetching contacts:", error);
@@ -35,8 +34,8 @@ export const Home = () => {
   const handleConfirmDelete = async () => {
     try {
       await deleteContact(selectedContact.id);
-      const data = await getContacts();
-      dispatch({ type: "set_contacts", payload: data.contacts });
+      const contacts = await getContacts();
+      dispatch({ type: "set_contacts", payload: contacts });
       setShowModal(false);
       setSelectedContact(null);
     } catch (error) {
