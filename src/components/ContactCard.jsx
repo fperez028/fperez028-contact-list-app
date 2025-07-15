@@ -7,7 +7,7 @@ export const ContactCard = ({ contact, onDelete }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="card shadow-sm">
+        <div className="card shadow">
             <div className="card-body d-flex">
                 <img
                     src="../src/assets/img/spock.png"

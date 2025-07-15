@@ -5,15 +5,15 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="navbar bg-light py-3">
-      <div className="container"> {/* Bootstrap container adds horizontal padding */}
+    <nav className="navbar bg-info shadow py-3">
+      <div className="container">
         <div
           className="d-flex justify-content-between align-items-center mx-auto"
           style={{ maxWidth: "500px", width: "100%" }}
         >
-          <h2 className="fw-bold mb-0">Contact List</h2>
+          <h2 className="fw-bold text-muted mb-0">Contact List</h2>
           <button
-            className="btn btn-success"
+            className="btn btn-secondary shadow-sm"
             onClick={() => navigate("/add")}
           >
             Add New Contact
