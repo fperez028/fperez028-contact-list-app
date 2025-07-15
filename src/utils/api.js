@@ -1,7 +1,6 @@
 const API_BASE_URL = "https://playground.4geeks.com/apis/fake/contact";
 const AGENDA_SLUG = "fperez028";
 
-// Fetch all contacts associated with the agenda
 export async function getContacts() {
     try {
         const response = await fetch(`${API_BASE_URL}/agenda/${AGENDA_SLUG}`);
@@ -13,6 +12,28 @@ export async function getContacts() {
         return data;
     } catch (error) {
         console.error("getContacts error:", error);
+        throw error;
+    }
+}
+
+export async function createContact(contactData) {
+    try {
+        const response = await fetch(API_BASE_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                ...contactData,
+                agenda_slug: AGENDA_SLUG
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to create contact: ${response.status}`);
+        }
+
+        return await response.json(); // returns created contact
+    } catch (error) {
+        console.error("createContact error:", error);
         throw error;
     }
 }
