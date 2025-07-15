@@ -4,7 +4,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 import { updateContact, getContacts } from "../utils/api";
 
 export const EditContact = () => {
-    const { id } = useParams(); // Get contact ID from URL
+    const { id } = useParams();
     const { store, dispatch } = useGlobalReducer();
     const navigate = useNavigate();
 
@@ -49,8 +49,9 @@ export const EditContact = () => {
 
     return (
         <div className="container my-5">
+            <div className="d-flex flex-column align-items-center">
             <h2 className="mb-4">Edit Contact</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ width: "100%", maxWidth: "500px" }}>
                 <div className="mb-3">
                     <label className="form-label">Full Name</label>
                     <input
@@ -110,6 +111,7 @@ export const EditContact = () => {
                     Cancel
                 </button>
             </form>
+            </div>
         </div>
     );
 };

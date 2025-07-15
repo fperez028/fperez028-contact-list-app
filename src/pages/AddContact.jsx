@@ -37,8 +37,9 @@ export const AddContact = () => {
 
     return (
         <div className="container my-5">
+            <div className="d-flex flex-column align-items-center">
             <h2 className="mb-4">Add New Contact</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ width: "100%", maxWidth: "500px" }}>
                 <div className="mb-3">
                     <label className="form-label">Full Name</label>
                     <input
@@ -98,6 +99,7 @@ export const AddContact = () => {
                     Cancel
                 </button>
             </form>
+            </div>
         </div>
     );
 };
