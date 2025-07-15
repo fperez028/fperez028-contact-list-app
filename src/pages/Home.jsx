@@ -50,10 +50,10 @@ export const Home = () => {
 
   return (
     <div className="container my-5">
-        <div className="row">
+        <div className="d-flex flex-column align-items-center">
             {store.contacts?.length > 0 ? (
               store.contacts.map((contact) => (
-                <div key={contact.id} className="col-md-6 mb-4">
+                <div key={contact.id} className="mb-4" style={{ width: "100%", maxWidth: "500px" }}>
                   <ContactCard contact={contact} onDelete={handleDeleteClick} />
                 </div>
               ))
