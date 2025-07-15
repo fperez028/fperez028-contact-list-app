@@ -10,7 +10,7 @@ export const ContactCard = ({ contact, onDelete }) => {
         <div className="card shadow-sm">
             <div className="card-body d-flex">
                 <img
-                    src="https://static.wikia.nocookie.net/stexpanded/images/2/27/Spock%2C_2267.jpg/revision/latest?cb=20100501033904"
+                    src="../src/assets/img/spock.png"
                     alt="Profile"
                     className="rounded-circle me-3"
                     style={{ width: "100px", height: "100px", objectFit: "cover" }}
@@ -52,7 +52,7 @@ export const ContactCard = ({ contact, onDelete }) => {
 ContactCard.propTypes = {
     contact: PropTypes.shape({
         id: PropTypes.number.isRequired,
-        full_name: PropTypes.string,
+        name: PropTypes.string,
         email: PropTypes.string,
         phone: PropTypes.string,
         address: PropTypes.string
