@@ -1,29 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { useNavigate } from "react-router-dom";
 import { ContactCard } from "../components/ContactCard";
 import { DeleteConfirmationModal } from "../components/DeleteConfirmationModal";
 import { getContacts, deleteContact } from "../utils/api";
 
 export const Home = () => {
     const { store, dispatch } = useGlobalReducer();
-    const navigate = useNavigate();
+    const hasInitialized = useRef(false);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedContact, setSelectedContact] = useState(null);
     
-    useEffect(() => {
-        const loadContacts = async () => {
-            try {
-                const contacts = await getContacts();
-                dispatch({ type: "set_contacts", payload: contacts });
-            } catch (error) {
-                console.error("Error fetching contacts:", error);
-            }
-        };
+  useEffect(() => {
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
 
-        loadContacts();
-    }, [dispatch]);
+    const loadContacts = async () => {
+      try {
+        const response = await fetch(`https://playground.4geeks.com/contact/agendas/fperez028/contacts`);
+
+        if (response.status === 404) {
+          console.warn("Agenda not found. Creating agenda...");
+
+          const createResponse = await fetch(`https://playground.4geeks.com/contact/agendas/fperez028`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ slug: "fperez028" })
+          });
+
+          if (!createResponse.ok) {
+            if (createResponse.status === 400) {
+              console.warn("Agenda may already exist (400), continuing...");
+            } else {
+              throw new Error(`Failed to create agenda: ${createResponse.status}`);
+            }
+          } else {
+            console.log("Agenda created successfully.");
+          }
+
+          // Add slight delay to allow backend to finish provisioning
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+
+        // Fetch contacts after ensuring agenda exists
+        const contactsResponse = await fetch(`https://playground.4geeks.com/contact/agendas/fperez028/contacts`);
+
+        if (!contactsResponse.ok) {
+          throw new Error(`Failed to fetch contacts: ${contactsResponse.status}`);
+        }
+
+        const data = await contactsResponse.json();
+        dispatch({ type: "set_contacts", payload: data.contacts });
+
+      } catch (error) {
+        console.error("Error during contact load/init:", error);
+      }
+    };
+
+    loadContacts();
+  }, [dispatch]);
 
   const handleDeleteClick = (contactId) => {
     const contact = store.contacts.find((c) => c.id === contactId);
